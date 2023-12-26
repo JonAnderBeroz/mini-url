@@ -52,7 +52,7 @@ export default function HomePage() {
 
   return (
     <MagicMotion>
-      <>
+      <section className="flex flex-col gap-8 items-center">
         <h1 className="text-7xl tracking-tighter font-extrabold">Mini <span className="text-[hsl(248,40%,56%)]">URL</span></h1>
         <ul className="flex flex-col max-h-96 overflow-hidden rounded-xl divide-y divide-slate-200/5 scroll-smooth max-w-sm w-full">
           {
@@ -77,7 +77,7 @@ export default function HomePage() {
           </div>
         </form>
         <button className="bg-zinc-800 hover:bg-zinc-900 font-medium text-xl w-48 py-3 rounded-full transition-all disabled:bg-white/10 disabled:text-zinc-400" onClick={convertURLs} disabled={!urls || urls.length === 0}>Convert</button>
-      </>
+      </section>
     </MagicMotion>
   );
 }

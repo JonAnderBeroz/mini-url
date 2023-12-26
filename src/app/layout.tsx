@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
-        <main className="flex min-h-screen flex-col items-center justify-center gap-10 bg-gradient-to-b from-[#1b2132] to-[#162133] text-white">
+        <main className="flex min-h-screen flex-col items-center justify-center  bg-gradient-to-b from-[#1b2132] to-[#162133] text-white">
           {children}
         </main>
       </body>
