@@ -1,9 +1,16 @@
 'use client'
 
+import { useEffect, useState } from "react";
 import { type url } from "../page"
+import Cookies from 'js-cookie'
 
 export default function miniURLs() {
-  const urls = JSON.parse(localStorage.getItem('urls') ?? '[]') as url[]
+  const [urls, setUrls] = useState<url[]>([])
+
+  useEffect(() => {
+    const urls =JSON.parse(localStorage.getItem('urls') ?? '[]') as url[]
+    setUrls(urls)
+  }, [])
 
   if (urls.length === 0) {
     return <p>There are no minified urls on localStorage</p>
@@ -17,6 +24,8 @@ export default function miniURLs() {
 
   function openWindow(slug: string | undefined) {
     if(!slug) return;
+    const url = urls.find(url => url.slug === slug)?.url ?? '';
+    Cookies.set('url', url)
     open(`${location.origin}/min/${slug}`, "_blank")
   }
 

@@ -1,22 +1,19 @@
 'use client';
 
-import { type NextRequest } from "next/server";
-import { type url } from "./app/page";
-import { useRouter } from "next/router";
+import { NextResponse, type NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const url: URL = new URL(request.url)
-  console.log('a')
   const slugStart = url.pathname.lastIndexOf('/');
   const slug = url.pathname.slice(slugStart + 1)
   console.log(slug)
-  const unparsedUrls = localStorage.getItem('urls');
-  const urls = JSON.parse(unparsedUrls) as url[];
-  const link = urls.find(url => url.slug === slug)
-  if(!link) {
-    console.log("Url not found");
-  }
-  const router = useRouter();
+  const cookie: {
+    name: string,
+    value: string,
+  } | undefined = request.cookies.get('url')
+  if(!cookie?.value) return NextResponse.redirect(request.nextUrl.origin)
+  console.log(cookie.value);
+  return NextResponse.redirect(new URL(cookie.value))
 }
 
 export const config = {
